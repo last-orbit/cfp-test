@@ -9,6 +9,7 @@ This project is a full-stack task management app with a React front-end and a No
 
 cfp-test/
 ├── client/ # Frontend (React + Vite + TypeScript)
+
 └── server/ # Backend (Node + Express + TypeScript)
 
 yaml
