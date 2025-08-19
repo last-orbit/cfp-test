@@ -16,21 +16,25 @@ cfp-test/
 
 ---
 
-## Getting Started
+## Running Locally
 
 ### 1. Clone the repo
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/last-orbit/cfp-test.git
 cd cfp-test
 ```
 ### 2. Install dependencies
 ```bash
-
+# Install root dependencies
 npm install
+# Install client dependencies
 cd client
 npm install
+# Install server dependencies
 cd ../server
 npm install
+# Go back to the root
+cd ..
 ```
 ### 3. Running the project
 Start both frontend and backend simultaneously in the root folder:
