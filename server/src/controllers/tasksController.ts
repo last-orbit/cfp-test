@@ -26,7 +26,7 @@ export const getAllTasks = (
   res: Response,
   next: NextFunction
 ) => {
-    try {
+  try {
     console.log(`Retrieved all tasks. Total: ${items.length}`);
     res.status(200).json(items);
   } catch (error) {
@@ -43,10 +43,10 @@ export const getTaskById = (
   try {
     const { id } = req.params;
     const task = items.find((task) => task.id === Number(id));
-      if (!task) {
-        console.log(`Task with id ${id} not found`);
-        return res.status(404).json({ error: 'Task not found' });
-      }
+    if (!task) {
+      console.log(`Task with id ${id} not found`);
+      return res.status(404).json({ error: 'Task not found' });
+    }
     console.log(`Retrieved task: ${JSON.stringify(task)}`);
     res.status(200).json(task);
   } catch (error) {
@@ -76,19 +76,16 @@ export const updateTask = (req: Request, res: Response, next: NextFunction) => {
 };
 
 // Delete a task
-export const deleteTask = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { id } = req.params;
-    const index = items.findIndex((task) => task.id === Number(id));
-    if (index === -1) {
-      console.log(`Task with id ${id} not found for deletion`);
-      return res.status(404).json({ error: 'Task not found' });
-    }
+export const deleteTask = (req: Request, res: Response) => {
+  const id = Number(req.params.id);
 
-    items.splice(index, 1);
-    console.log(`Deleted task: ${JSON.stringify(index)}`);
-    res.status(200).json({ message: 'Task deleted successfully' });
-  } catch (error) {
-    next(error);
+  const index = items.findIndex((task) => task.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Task not found' });
   }
+
+  const deletedTask = items.splice(index, 1)[0]; // removes the task from the array
+
+  return res.json({ message: 'Task deleted', task: deletedTask });
 };
